@@ -22,7 +22,7 @@ It supports strings, hashes, lists, sets, sorted sets and offers an incredible p
 	require "judgee"
   
 	# Create an instance of Judgee.
-	# It assumes that your Redis instance is running on localhost at port 6379.
+	# Judgee assumes that your Redis instance is running on localhost at port 6379.
 	judgee = Judgee::Classifier.new
 
 	# Is your Redis instance running on a host in your network, simply pass your options

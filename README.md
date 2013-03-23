@@ -47,12 +47,12 @@ It supports strings, hashes, lists, sets, sorted sets and offers an incredible p
 ## Information on Performance 
 
 If you have a look at the source code, you might stumble upon two different method namings.
-There are two methods for training *(train, train_fast)*, two methods for untraining (untrain, untrain_fast) and two methods for classification (classify, classify_fast).
-The difference is quite simple. As the name suggests, all methods with the suffix '_fast' are (really) faster (3x to 10x) in processing the data, but virtually unreadable.
+There are two methods for training *(train, train_fast)*, two methods for untraining *(untrain, untrain_fast)* and two methods for classification *(classify, classify_fast)*.
+The difference is quite simple. As the name suggests, all methods with the suffix *'_fast'* are (really) faster (3x to 10x) in processing the data, but virtually unreadable.
 
-So use the '_fast' methods if you need performance, e.g. in you production environment and the 'slow' methods just for learning purposes or small data.
+So use the *'_fast'* methods if you need performance, e.g. in you production environment and the 'slow' methods just for learning purposes or small data.
 
-## Using the _fast methods
+## Using the *_fast* methods
 
 	# Now you can train the classifier
 	judgee.train_fast(:spam, ["bad", "worse", "stupid", "idiotic"])

@@ -25,10 +25,10 @@ It supports strings, hashes, lists, sets, sorted sets and offers an incredible p
 	# It assumes that your Redis instance is running on localhost at port 6379.
 	judgee = Judgee::Classifier.new
 
-	# Is Redis running on a host in your network, simply pass in your options
+	# Is your Redis instance running on a host in your network, simply pass your options
 	judgee = Judgee::Classifier.new(:host => "10.0.1.1", :port => 6380)
 
-	# It also supports Unix sockets
+	# Judgee also supports Unix sockets
 	judgee = Judgee::Classifier.new(:path => "/tmp/redis.sock")
 
 
@@ -46,13 +46,13 @@ It supports strings, hashes, lists, sets, sorted sets and offers an incredible p
 
 ## Information on Performance 
 
-If you read the source code, you might stumble upon the confusing method names.
+If you have a look at the source code, you might stumble upon two different method namings.
 There are two methods for training (train, train_fast), two methods for untraining (untrain, untrain_fast) and two methods for classification (classify, classify_fast).
 The difference is quite simple. As the name suggests, all methods with the suffix '_fast' are (really) faster (3x to 10x) in processing the data, but virtually unreadable.
 
-So use the '_fast' methods if you need performance, e.g. in production and the methods without the suffix for learning purposes.
+So use the '_fast' methods if you need performance, e.g. in you production environment and the 'slow' methods just for learning purposes or small data.
 
-## For higher performance, use the _fast methods
+## Using the _fast methods
 
 	# Now you can train the classifier
 	judgee.train_fast(:spam, ["bad", "worse", "stupid", "idiotic"])

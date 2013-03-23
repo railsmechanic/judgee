@@ -32,7 +32,6 @@ It supports strings, hashes, lists, sets, sorted sets and offers an incredible p
 	judgee = Judgee::Classifier.new(:path => "/tmp/redis.sock")
 
 
-
 	# Now you can train the classifier
 	judgee.train(:spam, ["bad", "worse", "stupid", "idiotic"])
 	judgee.train(:ham, ["good", "better", "best", "lovely"])
@@ -52,3 +51,16 @@ There are two methods for training (train, train_fast), two methods for untraini
 The difference is quite simple. As the name suggests, all methods with the suffix '_fast' are (really) faster (3x to 10x) in processing the data, but virtually unreadable.
 
 So use the '_fast' methods if you need performance, e.g. in production and the methods without the suffix for learning purposes.
+
+## For higher performance, use the _fast methods
+
+	# Now you can train the classifier
+	judgee.train_fast(:spam, ["bad", "worse", "stupid", "idiotic"])
+	judgee.train_fast(:ham, ["good", "better", "best", "lovely"])
+
+	# After training, classify your text sample
+	judgee.classify_fast(["good", "better", "best", "worse"]) # => :ham
+
+
+	# Want to untrain some words?
+	judgee.untrain_fast(:spam, ["bad", "worse"])

@@ -5,9 +5,7 @@ require "redis"
 module Judgee
   class Classifier
 
-    ###
-    # Constants
-    ###
+    ### Constants ###
     CATEGORIES_KEY  = "judgee:categories"
     CATEGORY_KEY    = "judgee:category"
     ALPHA           = 1.0
@@ -84,8 +82,8 @@ module Judgee
       occurances  = count_occurance(data)
 
       categories.each do |category|
-        numerator   = Hash[occurances.keys.zip(redis.hmget(redis_category_key(category), occurances.keys))].inject({}) { |hash, (key, value)| hash[key] = value.to_f + ALPHA; hash }
-        denominator = categories.map { |category| Hash[occurances.keys.zip(redis.hmget(redis_category_key(category), occurances.keys))] }.inject(Hash.new(0)) { |main_hash, sub_hash| main_hash.merge(sub_hash) { |key, value_first, value_second| value_first.to_f + value_second.to_f} }.inject(Hash.new(0)) { |hash, (key, value)| hash[key] = value.to_f + (ALPHA * data.length); hash }
+        numerator         = Hash[occurances.keys.zip(redis.hmget(redis_category_key(category), occurances.keys))].inject({}) { |hash, (key, value)| hash[key] = value.to_f + ALPHA; hash }
+        denominator       = categories.map { |category| Hash[occurances.keys.zip(redis.hmget(redis_category_key(category), occurances.keys))] }.inject(Hash.new(0)) { |main_hash, sub_hash| main_hash.merge(sub_hash) { |key, value_first, value_second| value_first.to_f + value_second.to_f} }.inject(Hash.new(0)) { |hash, (key, value)| hash[key] = value.to_f + (ALPHA * data.length); hash }
         result[category] += numerator.merge(denominator) { |key, value_numerator, value_denominator| (occurances[key] * Math.log(value_numerator / value_denominator)).abs }.values.inject(0, :+)
       end
 
@@ -112,7 +110,7 @@ module Judgee
     def count_occurance(data='')
       bag_of_words = Hash.new(0)
 
-      data = [data].flatten.map! do |word|
+      data = [data].flatten.map do |word|
         word.to_s.strip
       end.delete_if(&:empty?)
 
@@ -121,7 +119,7 @@ module Judgee
       end
       bag_of_words
     rescue
-      raise ArgumentError, 'input must be a single String or an Array of Strings'
+      raise ArgumentError, 'Input must be a single String or an Array of Strings'
     end
 
 

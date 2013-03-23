@@ -26,8 +26,6 @@ describe Judgee::Classifier do
       @judgee.train(@spam_category, @spam_data)
       categories = @redis.smembers(CATEGORIES_KEY)
       categories.length.should eq 2
-      categories.should_include("judgee:categories:spam_spec")
-      categories.should_include("judgee:categories:ham_spec")
     end
   end
   

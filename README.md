@@ -13,36 +13,36 @@ It supports strings, hashes, lists, sets, sorted sets and offers an incredible p
 
 ## Installation
 
-		gem install judgee
+	gem install judgee
 
 
 ## Getting started
 
-		# Require Judgee
-		require "judgee"
-    
-		# Create an instance of Judgee.
-		# It assumes that your Redis instance is running on localhost at port 6379.
-		judgee = Judgee::Classifier.new
+	# Require Judgee
+	require "judgee"
+  
+	# Create an instance of Judgee.
+	# It assumes that your Redis instance is running on localhost at port 6379.
+	judgee = Judgee::Classifier.new
 
-		# Is Redis running on a host in your network, simply pass in your options
-		judgee = Judgee::Classifier.new(:host => "10.0.1.1", :port => 6380)
-		
-		# It also supports Unix sockets
-		judgee = Judgee::Classifier.new(:path => "/tmp/redis.sock")
-		
+	# Is Redis running on a host in your network, simply pass in your options
+	judgee = Judgee::Classifier.new(:host => "10.0.1.1", :port => 6380)
+
+	# It also supports Unix sockets
+	judgee = Judgee::Classifier.new(:path => "/tmp/redis.sock")
 
 
-		# Now you can train the classifier
-		judgee.train(:spam, ["bad", "worse", "stupid", "idiotic"])
-		judgee.train(:ham, ["good", "better", "best", "lovely"])
 
-		# After training, classify your text sample
-		judgee.classify(["good", "better", "best", "worse"]) # => :ham
-		
-		
-		# Want to untrain some words?
-		judgee.untrain(:spam, ["bad", "worse"])
+	# Now you can train the classifier
+	judgee.train(:spam, ["bad", "worse", "stupid", "idiotic"])
+	judgee.train(:ham, ["good", "better", "best", "lovely"])
+
+	# After training, classify your text sample
+	judgee.classify(["good", "better", "best", "worse"]) # => :ham
+
+
+	# Want to untrain some words?
+	judgee.untrain(:spam, ["bad", "worse"])
 
 
 ## Information on Performance 
